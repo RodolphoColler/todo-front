@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgb(67, 102, 175);
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(184, 199, 230);
+  border-radius: 15px;
+  width: 30vw;
+  height: 5vh;
+}
+
+input {
+  background-color: rgb(184, 199, 230);
+  color: rgb(4, 27, 79);
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  width: 25vw;
+  height: auto;
+  font-weight: 700;
+  font-size: medium;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgb(3, 37, 108);
+  font-size: 20px;
+}
