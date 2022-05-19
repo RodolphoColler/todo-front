@@ -1,6 +1,7 @@
 import './todo.css';
 import { BiPlusMedical } from 'react-icons/bi';
 import { useState } from 'react';
+import create from './services/todo';
 
 function App() {
   const [newTodo, setNewTodo] = useState('');
@@ -9,6 +10,7 @@ function App() {
   async function handleSubmit(event) {
     event.preventDefault();
     setTodos((prev) => [...prev, newTodo]);
+    await create(newTodo);
   }
 
   return (
