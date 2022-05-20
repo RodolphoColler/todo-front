@@ -34,10 +34,40 @@ input {
   font-size: medium;
 }
 
-button {
+.submit-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
   color: rgb(3, 37, 108);
   font-size: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+li {
+  background-color: rgb(197, 209, 232);
+  padding: 5px;
+  color: rgb(4, 27, 79);
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px;
+  outline: none;
+  border: none;
+  width: 25vw;
+  height: auto;
+  font-weight: 700;
+  font-size: medium;
+  margin-top: 4px;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgb(3, 37, 108);
+  font-size: 15px;
+  padding: 5px;
 }
