@@ -1,7 +1,8 @@
 import './todo.css';
 import { BiPlusMedical } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
-import create, { getAll } from './services/todo';
+import { FiTrash2 } from 'react-icons/fi';
+import create, { getAll, deleteTodo } from './services/todo';
 
 function App() {
   const [newTodo, setNewTodo] = useState('');
@@ -9,15 +10,19 @@ function App() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    const todo = { todo: newTodo, finished: false, id: todos.length };
-    setTodos((prev) => [...prev, todo]);
     await create(newTodo);
+    const requestedTodos = await getAll();
+    setTodos(requestedTodos);
+  }
+
+  async function handleDelete(event) {
+    await deleteTodo(event.target.id);
+    const requestedTodos = await getAll();
+    setTodos(requestedTodos);
   }
 
   useEffect(() => {
-    getAll()
-      .then((result) => setTodos(result))
-      .catch(() => { global.alert('Sua requisição não foi executada com sucesso'); });
+    getAll().then((result) => setTodos(result));
   }, []);
 
   return (
@@ -32,11 +37,18 @@ function App() {
             onChange={(e) => setNewTodo(e.target.value)}
           />
         </label>
-        <button type="submit" aria-label="add new todo"><BiPlusMedical /></button>
+        <button type="submit" aria-label="add new todo" className="submit-button"><BiPlusMedical /></button>
       </form>
       <ul>
         {
-          todos.map(({ id, todo }) => <li key={id}>{ todo }</li>)
+          todos.map(({ id, todo }) => (
+            <li key={id}>
+              { todo }
+              <button type="button" id={id} className="delete-button" onClick={(event) => handleDelete(event)}>
+                <FiTrash2 id={id} />
+              </button>
+            </li>
+          ))
         }
       </ul>
     </main>
