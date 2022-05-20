@@ -1,7 +1,7 @@
 import './todo.css';
 import { BiPlusMedical } from 'react-icons/bi';
-import { useState } from 'react';
-import create from './services/todo';
+import { useEffect, useState } from 'react';
+import create, { getAll } from './services/todo';
 
 function App() {
   const [newTodo, setNewTodo] = useState('');
@@ -9,9 +9,16 @@ function App() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setTodos((prev) => [...prev, newTodo]);
+    const todo = { todo: newTodo, finished: false, id: todos.length };
+    setTodos((prev) => [...prev, todo]);
     await create(newTodo);
   }
+
+  useEffect(() => {
+    getAll()
+      .then((result) => setTodos(result))
+      .catch(() => { global.alert('Sua requisição não foi executada com sucesso'); });
+  }, []);
 
   return (
     <main>
@@ -29,7 +36,7 @@ function App() {
       </form>
       <ul>
         {
-          todos.map((todo) => <li>{ todo }</li>)
+          todos.map(({ id, todo }) => <li key={id}>{ todo }</li>)
         }
       </ul>
     </main>

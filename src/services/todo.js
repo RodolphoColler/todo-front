@@ -1,13 +1,3 @@
-// export default async function getAll() {
-//   try {
-//     const request = await fetch('http://localhost:3001/todo');
-//     const response = await request.json();
-
-//     return response;
-//   } catch (error) {
-//     return error;
-//   }
-// }
 export default async function create(todo) {
   try {
     const headers = {
@@ -23,4 +13,11 @@ export default async function create(todo) {
   } catch (error) {
     return error;
   }
+}
+
+export async function getAll() {
+  const request = await fetch('http://localhost:3001/todo');
+  const response = await request.json();
+
+  return response;
 }
